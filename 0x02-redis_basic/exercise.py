@@ -46,8 +46,7 @@ def call_history(method: Callable) -> Callable:
         if isinstance(self._redis, redis.Redis):
             self._redis.rpush(f'{func_name}:outputs', str(output))
 
-        return method(self, *args, **kwargs)
-
+        return output
     return wrapper
 
 
@@ -72,7 +71,7 @@ def replay(method: Callable) -> None:
         print('{}(*({},)) -> {}'.format(
             func_name,
             input.decode("utf-8"),
-            output.decode("utf-8")
+            output
         ))
 
 
