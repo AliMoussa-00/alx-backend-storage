@@ -46,7 +46,8 @@ def call_history(method: Callable) -> Callable:
         if isinstance(self._redis, redis.Redis):
             self._redis.rpush(f'{func_name}:outputs', str(output))
 
-        return output
+        return method(self, *args, **kwargs)
+
     return wrapper
 
 
