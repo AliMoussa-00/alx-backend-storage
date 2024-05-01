@@ -13,7 +13,7 @@ def count_calls(method: Callable) -> Callable:
     and increments the count in Redis.
     """
     @wraps(method)
-    def wrapper(self, *args, **kwargs) -> Union[str, bytes, int, float]:
+    def wrapper(self, *args, **kwargs) -> Any:
         """
         Wrapper function that increments the count of method called.
         """
