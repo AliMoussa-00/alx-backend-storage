@@ -73,7 +73,7 @@ def replay(method: Callable) -> None:
     input_list = r.lrange(f'{func_name}:inputs', 0, -1)
     output_list = r.lrange(f'{func_name}:outputs', 0, -1)
     for input, output in zip(input_list, output_list):
-        print('{}(*({},)) -> {}'.format(
+        print('{}(*{}) -> {}'.format(
             func_name,
             input.decode("utf-8"),
             output.decode("utf-8")
