@@ -37,9 +37,7 @@ def call_history(method: Callable) -> Callable:
         """
         func_name = method.__qualname__
 
-        if isinstance(self._redis, redis.Redis):
-            for arg in args:
-                self._redis.rpush(f'{func_name}:inputs', str(arg))
+        self._redis.rpush(f'{func_name}:inputs', str(args))
 
         output = method(self, *args, **kwargs)
 
