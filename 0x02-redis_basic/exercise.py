@@ -103,7 +103,7 @@ class Cache:
     def get(
             self,
             key: str,
-            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+            fn: Optional[Callable] = None) -> Any:
         """
         Retrieves the value associated with the given key from the cache.
         """
