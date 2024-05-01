@@ -61,15 +61,19 @@ def replay(method: Callable) -> None:
         return
 
     func_name = method.__qualname__
-    count = 0
-    if r.exists(func_name) != 0:
-        count = int(r.get(func_name))
+
+    count = r.get(func_name)
+    try:
+        count = int(count.decode('utf-8'))
+    except Exception:
+        count = 0
+
     print(f'{func_name} was called {count} times:')
 
     input_list = r.lrange(f'{func_name}:inputs', 0, -1)
     output_list = r.lrange(f'{func_name}:outputs', 0, -1)
     for input, output in zip(input_list, output_list):
-        print('{}(*({})) -> {}'.format(
+        print('{}(*({},)) -> {}'.format(
             func_name,
             input.decode("utf-8"),
             output.decode("utf-8")
